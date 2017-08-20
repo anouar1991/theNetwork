@@ -1,26 +1,41 @@
 <section>
-  <div class="page-header">
-    <h1 ng-bind="vm.shop.name"></h1>
-  </div>
-  <div class="pull-right"
-       ng-show="vm.shop.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       ui-sref="shops.edit({ shopId: vm.shop._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
+    <div class="row">
+        <div class="center-block col-md-6">
+            <div class="page-header">
+                <h1 ng-bind="vm.shop.name"></h1>
+                <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.shop.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.shop.user"
-            ng-bind="vm.shop.user.displayName"></span>
-      <span ng-if="!vm.shop.user">Deleted User</span>
+      <h5 style="float:right;" >
+      <span class="label label-success pull-right" ng-show="vm.shop.verified">Verified</span>
+      <span class="label label-danger pull-right" ng-show="!vm.shop.verified">Not verified</span>
+      </h5>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.shop.content"></p>
+            </div>
+            <span class="label label-info">Oth-Token</span>
+            <div class="input-group">
+                <input id="verificationToken" class="form-control" ng-value="vm.shop.verificationToken">
+                <span class="input-group-btn">
+                    <button class="btn btn-default " type="button" onClick="$('#verificationToken').select();
+document.execCommand('copy')">Copy</button>
+                </span>
+            </div>
+            <span class="label label-info">Req-Token</span>
+            <div class="input-group">
+                <input id="demandToken" class="form-control" ng-value="vm.shop.demandToken" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-show="vm.shop.demandToken"onClick="$('#demandToken').select();
+document.execCommand('copy')">Copy</button>
+                </span>
+            </div>
+            <div class="pull-right" ng-show="vm.shop.isCurrentUserOwner">
+                <a class="btn btn-primary" ui-sref="shops.edit({ shopId: vm.shop._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+                <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+            </div>
+        </div>
+    </div>
 </section>

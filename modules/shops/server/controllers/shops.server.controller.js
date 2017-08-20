@@ -20,7 +20,6 @@ exports.create = function(req, res) {
     var token = crypto.createHash('sha256');
     token.update('' + shop.email + shop._id);
     shop.verificationToken = token.digest('hex');
-    shop.password = crypto.createHash('sha256').update(shop.password).digest('hex');
 
 
     shop.save(function(err) {
@@ -93,7 +92,9 @@ exports.list = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
+            console.log(req.query.apiToken);
             res.jsonp(shops);
+
         }
     });
 };
@@ -112,16 +113,42 @@ exports.verify = function(req, res) {
             } else {
                 console.log("before :" + shop.verified);
                 shop.verified = true;
-
+                shop.url = req.query.url;
                 console.log("now :" + shop.verified);
                 shop.save(function(err) {
-                    return (
 
+                    if (err) {
+                       return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        })
+                    } else {
+                      return  res.status(200).jsonp(shop)
+                    };
+                })
+            }
+        })
+    }
+};
+
+exports.setDemandToken = function(req, res) {
+    if (req.params.verificationToken) {
+        Shop.findOne({
+            verificationToken: req.params.verificationToken
+        }, function(err, shop) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                shop.demandToken = req.body.demandToken;
+                shop.url = req.body.url;
+                shop.save(function(err) {
+                    return (
                         (err) ?
                         res.status(400).send({
                             message: errorHandler.getErrorMessage(err)
                         }) :
-                        res.status(200).send(shop.verified)
+                        res.status(200).jsonp(shop)
                     );
                 })
             }

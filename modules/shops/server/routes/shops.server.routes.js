@@ -14,9 +14,10 @@ module.exports = function(app) {
     app.route('/api/shops/login')
         .post(shops.login);
     app.route('/api/shops/deleteAll')
-    .get(shops.deleteAll);
+        .get(shops.deleteAll);
     app.route('/api/shops/verify/:verificationToken')
-        .get(shops.verify);
+        .get(shops.verify)
+        .post(shops.setDemandToken);
     app.route('/api/shops/:shopId').all(shopsPolicy.isAllowed)
         .get(shops.read)
         .put(shops.update)

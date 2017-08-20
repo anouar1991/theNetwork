@@ -17,7 +17,11 @@ var ShopSchema = new Schema({
         required: 'Please fill Shop name',
         trim: true
     },
-    phone: {
+    url: {
+        type: String,
+        default:''
+    },
+    phoneNumber: {
         type: String,
         required: 'please fill Shop phone number'
     },
@@ -33,12 +37,13 @@ var ShopSchema = new Schema({
         required: 'Please fill Shop email',
         trim: true
     },
-    verificationToken: String,
-    password: {
+    verificationToken: {
         type: String,
         default: '',
-        required: 'Please fill Shop name',
-        trim: true
+    },
+    demandToken: {
+        type: String,
+        default: '',
     },
     created: {
         type: Date,

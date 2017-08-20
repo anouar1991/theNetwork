@@ -78,6 +78,10 @@ var UserSchema = new Schema({
     type: String,
     required: 'Provider is required'
   },
+  shopToken:{
+    type:String,
+  }
+  ,
   providerData: {},
   additionalProvidersData: {},
   roles: {
