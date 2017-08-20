@@ -1,0 +1,23 @@
+<section>
+    <div class="page-header">
+        <h1>Customers</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchForCustomer.name" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="list-group">
+        <a ng-repeat="customer in vm.customers|filter:searchForCustomer" ui-sref="customers.view({ customerId: customer._id })" class="list-group-item">
+            <h4 class="list-group-item-heading" ng-bind="customer.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" ng-if="vm.customers.$resolved && !vm.customers.length">
+        No Customers yet, why don't you <a ui-sref="customers.create">create one</a>?
+    </div>
+</section>

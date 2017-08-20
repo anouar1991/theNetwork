@@ -3,7 +3,10 @@
 module.exports = function (app) {
   // Root routing
   var core = require('../controllers/core.server.controller');
-
+  app.route('/categories')
+		.get(function (request, response) {
+			response.json([{ name: 'Beverages' }, { name: 'Condiments' }]);
+		});
   // Define error pages
   app.route('/server-error').get(core.renderServerError);
 
@@ -11,5 +14,6 @@ module.exports = function (app) {
   app.route('/:url(api|modules|lib)/*').get(core.renderNotFound);
 
   // Define application route
-  app.route('/*').get(core.renderIndex);
+  app.route('/').get(core.renderIndex);
+  //just try:
 };

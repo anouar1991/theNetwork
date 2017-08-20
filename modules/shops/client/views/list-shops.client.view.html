@@ -1,0 +1,26 @@
+<section>
+    <div class="page-header">
+        <h1>Shops</h1>
+    </div>
+    <div class="row">
+        <div class="input-group">
+            <input id="shopName" type="text" class="form-control" ng-model="searchForShop" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-success " type="button" data-ui-sref="shops.create"data-toggle="tooltip" title="     Create a shop">+</button>
+                </span>
+        </div>
+        <hr/>
+        <div ng-repeat="shop in vm.shops|filter:searchForShop" ui-sref="shops.view({ shopId: shop._id })" class="panel panel-default btn col-md-3">
+            <div class="panel-heading">
+                <h4 class="list-group-item-heading">{{shop.name}} <verified-badge></verified-badge></h4>
+            </div>
+            <div class="panel-body">
+                <img src="modules/shops/img/shop-defaul.jpg" class="img-thumbnail" alt="shop.name" width="304" height="236">
+                <p>tel : 0458879978</p>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" ng-if="vm.shops.$resolved && !vm.shops.length">
+        No Shops yet, why don't you <a ui-sref="shops.create">create one</a>?
+    </div>
+</section>

@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input id="customerName" type="text" class="form-control" ng-model="searchForCustomer.name" placeholder="Search for...">
+            <span class="input-group-btn">
+                    <button class="btn btn-success " type="button" data-ui-sref="customers.create"data-toggle="tooltip" title="     Create a customer">+</button>
+                </span>
+        </div>
+        <div ng-show="searchForCustomer.name" class="list-group list">
+            <a href="#" ng-repeat="(index, customer) in vm.customers|filter:searchForCustomer" class="list-group-item">
+                <h4 class="list-group-item-heading" ng-bind="customer.name" ng-click="vm.customers.selectCustomer(customer);searchForCustomer.name =null;"></h4>
+            </a>
+        </div>
+    </div>
+</div>

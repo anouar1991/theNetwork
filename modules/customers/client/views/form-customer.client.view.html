@@ -1,0 +1,51 @@
+<section>
+    <div class="page-header">
+        <h1>{{vm.customer._id ? 'Edit Customer' : 'New Customer'}}</h1>
+    </div>
+    <div class="col-md-2 col-md-offset-5">
+        <form name="vm.form.customerForm" class="form-horizontal" ng-submit="vm.save(vm.form.customerForm.$valid)" novalidate>
+            <fieldset>
+                <div class="form-group " show-errors>
+                    <label class="control-label" for="name">Name</label>
+                    <input name="name" type="text" ng-model="vm.customer.name" id="name" class="form-control input-md" placeholder="Name" required>
+                    <div ng-messages="vm.form.customerForm.name.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Customer name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" show-errors>
+                    <label class="control-label" for="name">Phone Number</label>
+                    <input name="name" type="text" ng-model="vm.customer.phoneNumber" id="phoneNumber" class="form-control input-md" placeholder="Phone Number" required>
+                    <div ng-messages="vm.form.customerForm.phoneNumber.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Phone Number is required.</p>
+                    </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class=" control-label" for="street">Street</label>
+                    <input id="street" name="street" type="text" ng-model="vm.customer.address.street" placeholder="Enter your street" class="form-control input-md" required="">
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class=" control-label" for="city">City</label>
+                    <input id="city" name="city" type="text" ng-model="vm.customer.address.city" placeholder="Enter your city" class="form-control input-md" required="">
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class=" control-label" for="state">State</label>
+                    <input id="state" name="state" type="text" ng-model="vm.customer.address.state" placeholder="Enter your state" class="form-control input-md" required="">
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class=" control-label" for="zip_code">Zip code</label>
+                    <input id="zip_code" name="zip_code" ng-model="vm.customer.address.zip_code" type="text" placeholder="Enter your zip code" class="form-control input-md" required="">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="center-block btn btn-success">{{vm.customer._id ? 'Update' : 'Create'}}</button>
+                </div>
+                <div ng-show="vm.error" class="text-danger">
+                    <strong ng-bind="vm.error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

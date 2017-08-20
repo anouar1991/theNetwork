@@ -1,0 +1,17 @@
+<div class="panel panel-default col-md-3" ng-repeat="(productNum,product) in vm.form.products">
+    <div class="panel-heading">
+        <h3 class="title">{{product.title}}</h2>
+    </div>
+    <div class="panel-body">
+        <p>
+            {{product.description}}
+        </p>
+        <h4>details:</h3>
+        <div ng-repeat="(key, value) in product.attributes">
+            <label class="text-primary">{{key}}</label> : <span>{{value}}</span>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-danger" ng-click="vm.product.delete(productNum)">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<section>
+    <div class="page-header">
+        <h1>{{vm.request._id ? 'Edit Request' : 'New Request'}}</h1>
+    </div>
+    <div class="col-md-12">
+        <form name="vm.form.requestForm" ng-submit="vm.save(vm.form.requestForm.$valid)" novalidat>
+            <fieldset>
+                <div class="form-group form-inline" show-errors>
+                    <h3>Select a Customer :</h3>
+                    <search-customer></search-customer>
+                </div>
+                <div ng-show="vm.error" class="text-danger">
+                    <strong ng-bind="vm.error"></strong>
+                </div>
+            </fieldset>
+            <div>
+                <h4>Request for : <span class="text-primary" ng-bind="vm.form.customer.name" ></span></h4>
+            </div>
+            <div class="form-group product">
+                <label class="control-label" for="productTitle">Title:</label>
+                <input name="productTitle" class="form-control" ng-model="vm.form.title" type="text">
+            </div>
+            <add-product-modal>
+            </add-product-modal>
+            <display-products></display-products>
+            <div class="form-group">
+                <button ng-click="vm.submitRequest();" class="btn btn-default btn-block">{{vm.request._id ? 'Update' : 'Create'}}</button>
+            </div>
+        </form>
+    </div>
+</section>

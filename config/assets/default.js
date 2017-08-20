@@ -8,13 +8,17 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap-theme.css'
       ],
       js: [
-        'public/lib/angular/angular.js',
-        'public/lib/angular-resource/angular-resource.js',
-        'public/lib/angular-animate/angular-animate.js',
-        'public/lib/angular-ui-router/release/angular-ui-router.js',
-        'public/lib/angular-ui-utils/ui-utils.js',
-        'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js'
+        'public/lib/jquery/dist/jquery.min.js',
+        'public/lib/bootstrap/dist/js/bootstrap.min.js',
+        'public/lib/angular/angular.js',//
+        'public/lib/angular-resource/angular-resource.js',//
+        'public/lib/angular-animate/angular-animate.js',//
+        'public/lib/angular-ui-router/angular-ui-router.js',//
+        'public/lib/angular-ui-utils/ui-utils.js',//
+        'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',//
+        'public/lib/angular-file-upload/angular-file-upload.js',//,
+        'public/lib/modals/requests.js',
+        'public/lib/angular-telephone-filter/dist/angular-telephone-filter.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
