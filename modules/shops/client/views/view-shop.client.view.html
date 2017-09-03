@@ -12,21 +12,34 @@
     </em>
   </small>
             </div>
+            <span class="label label-info">Api-Url</span>
+         <div class="input-group">
+            <input id="url" class="form-control" ng-value="vm.shop.url">
+            <span class="input-group-btn">
+            <button class="btn btn-default " type="button" onClick="$('#url').select();
+               document.execCommand('copy')">Copy</button>
+            </span>
+         </div>
             <span class="label label-info">Oth-Token</span>
-            <div class="input-group">
-                <input id="verificationToken" class="form-control" ng-value="vm.shop.verificationToken">
-                <span class="input-group-btn">
+<div class="input-group">
+    <input id="verificationToken" class="form-control" ng-value="vm.shop.verificationToken">
+    <span class="input-group-btn">
                     <button class="btn btn-default " type="button" onClick="$('#verificationToken').select();
 document.execCommand('copy')">Copy</button>
                 </span>
-            </div>
+</div>
+
             <span class="label label-info">Req-Token</span>
             <div class="input-group">
-                <input id="demandToken" class="form-control" ng-value="vm.shop.demandToken" />
+                <input id="demandToken" class="form-control" ng-model="demandToken"ng-value="vm.shop.demandToken" />
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-show="vm.shop.demandToken"onClick="$('#demandToken').select();
 document.execCommand('copy')">Copy</button>
+                    <button class="btn btn-default" type="button" ng-show="demandToken" ng-click="vm.shop.verify()">Verify Shop</button>
                 </span>
+            </div>
+            <div class="row">
+              <div class="alert alert-danger" ng-show="vm.error" ng-bind="vm.error"></div>
             </div>
             <div class="pull-right" ng-show="vm.shop.isCurrentUserOwner">
                 <a class="btn btn-primary" ui-sref="shops.edit({ shopId: vm.shop._id })">

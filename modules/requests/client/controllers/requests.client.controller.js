@@ -6,9 +6,9 @@
         .module('requests')
         .controller('RequestsController', RequestsController);
 
-    RequestsController.$inject = ['$scope', '$state', '$window', '$http', 'Authentication', 'requestResolve'];
+    RequestsController.$inject = ['$scope', '$state', '$window', '$http', 'ShopsService', 'Authentication', 'requestResolve'];
 
-    function RequestsController($scope, $state, $window, $http, $timeout, $dialog, Authentication, request) {
+    function RequestsController($scope, $state, $window, $http, ShopsService, $timeout, $dialog, Authentication, request) {
         var vm = this;
 
 
@@ -19,9 +19,11 @@
         vm.form = {
             title: '',
             customer: {},
+            shops: [],
             products: [],
         };
 
+        vm.shops = ShopsService.query();
         vm.remove = remove;
         vm.save = save;
         vm.product = {};
@@ -52,10 +54,10 @@
             $('#attributeKey').focus();
 
         };
-        vm.product.deleteAttribute = function(attr){
-            delete this.attributes[attr] ;
+        vm.product.deleteAttribute = function(attr) {
+            delete this.attributes[attr];
         };
-        vm.product.editAttribute = function(attr){
+        vm.product.editAttribute = function(attr) {
             $('#attributeKey').val(attr);
             $('#attributeValue').focus();
         }
@@ -83,8 +85,17 @@
                 );
 
         };
-
-
+        //add a shop id manually
+        vm.shops.addshop = function(shop) {
+            if (vm.form.shops.indexOf(shop._id) != -1) return;
+            vm.form.shops.push(shop._id);
+        };
+        //add all shops [to debug]
+        vm.shops.addAll = function(){
+            for( shop in vm.shops){
+                vm.shops.addshop(shop);
+            }
+        }
         // Remove existing Request
         function remove() {
             if ($window.confirm('Are you sure you want to delete?')) {

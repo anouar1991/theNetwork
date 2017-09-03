@@ -76,7 +76,7 @@ exports.delete = function(req, res) {
 };
 exports.deleteAll = function(req, res) {
     Request.remove({}, function(err) {
-        console.log("deleted All ! "); 
+        console.log("deleted All ! ");
     });
 };
 /**
@@ -89,10 +89,9 @@ exports.list = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-    console.log(req.query.apiToken == 'superToken');
             res.jsonp(requests);
-        }
-    });
+        };
+    })
 };
 
 /**

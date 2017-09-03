@@ -10,10 +10,31 @@ var mongoose = require('mongoose'),
 /**
  * Request Schema
  */
+
+var OfferSchema = {
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'confirmed'],
+        default: 'pending'
+    },
+    price: {
+        type: Number,
+        required: 'Please Enter Offer Price'
+    },
+    date: {
+        type: Number,
+        default: 0
+    },
+    shopToken: {
+        type: String,
+        default: ''
+    }
+};
 var ProductScheme = {
     title: String,
     description: String,
     attributes: [],
+    offers: [OfferSchema],
     tags: [String],
     created: { type: Date, default: Date.now }
 };
@@ -26,18 +47,23 @@ var RequestSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
-    title: String,
-     status: {
-        type: String,
-        enum : ['pending','closed'],
-        default: 'pending'
-    },
     customer: {
         type: Schema.ObjectId,
         ref: 'Customer',
         required: [true, " Please specify the customer"]
     },
+    shops: [{
+        type: Schema.ObjectId,
+        ref: 'Shop'
+    }],
+    title: String,
+    status: {
+        type: String,
+        enum: ['pending', 'closed'],
+        default: 'pending'
+    },
     products: [ProductScheme]
+
 });
 
 // validators
@@ -52,7 +78,6 @@ RequestSchema.path('customer').validate(function(val, res) {
         }
     });
 }, "the customer doesn't exist");
-
 //scheme plugins : 
 RequestSchema.plugin(idValidator);
 

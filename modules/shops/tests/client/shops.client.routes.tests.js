@@ -45,7 +45,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           viewstate = $state.get('shops.view');
-          $templateCache.put('modules/shops/client/views/view-shop.client.view.html', '');
+          $templateCache.put('modules/shops/views/view-shop.client.view.html', '');
 
           // create mock Shop
           mockShop = new ShopsService({
@@ -84,7 +84,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(viewstate.templateUrl).toBe('modules/shops/client/views/view-shop.client.view.html');
+          expect(viewstate.templateUrl).toBe('modules/shops/views/view-shop.client.view.html');
         });
       });
 
@@ -95,7 +95,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           createstate = $state.get('shops.create');
-          $templateCache.put('modules/shops/client/views/form-shop.client.view.html', '');
+          $templateCache.put('modules/shops/views/form-shop.client.view.html', '');
 
           // create mock Shop
           mockShop = new ShopsService();
@@ -130,7 +130,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/shops/client/views/form-shop.client.view.html');
+          expect(createstate.templateUrl).toBe('modules/shops/views/form-shop.client.view.html');
         });
       });
 
@@ -141,7 +141,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           editstate = $state.get('shops.edit');
-          $templateCache.put('modules/shops/client/views/form-shop.client.view.html', '');
+          $templateCache.put('modules/shops/views/form-shop.client.view.html', '');
 
           // create mock Shop
           mockShop = new ShopsService({
@@ -180,7 +180,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/shops/client/views/form-shop.client.view.html');
+          expect(editstate.templateUrl).toBe('modules/shops/views/form-shop.client.view.html');
         });
 
         xit('Should go to unauthorized route', function () {

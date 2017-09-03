@@ -1,51 +1,66 @@
-
 <!-- Modal -->
 <div class="modal fade" id="addProduct" role="dialog">
-   <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content container-fluid">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add Product</h4>
-         </div>
-         <div class="modal-body">
-            <div>
-               <form>
-                  <div class="form-group">
-                     <label>
-                     Title:
-                     </label>
-                     <input class="form-control" ng-model="vm.product.title" type="text">
-                  </div>
-                  <div class="form-group">
-                     <label>
-                     description: </label>
-                     <textarea class="form-control" ng-model="vm.product.description" name="" id="" cols="10" rows="5"></textarea>
-                  </div>
-                  <div class="form-group">
-                     <label> Key:
-                     <input id="attributeKey" class="form-control" ng-model="vm.k">
-                     </label>
-                     <label>
-                     Value:
-                     <input id="attributeValue"class="form-control" ng-model="vm.v">
-                     </label>
-                     <button ng-click="vm.product.addAttribute(vm.k, vm.v); vm.k='';vm.v=''; ">+ attribute</button>
-                  </div>
-                  <hr>
-                  <h3>Details : </h3>
-                  <div ng-repeat="(key,val) in vm.product.attributes">
-                        <span ng-bind="key" class="label label-default"></span>:<span ng-bind="val"></span>
-                        <span class="btn label label-danger pull-right" ng-click="vm.product.deleteAttribute(key)">x</span>
-                        <span class="btn label label-warning pull-right" ng-click="vm.product.editAttribute(key);vm.k=key;">edit</span>
-                  </div>
-               </form>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content container-fluid">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Product</h4>
             </div>
-         </div>
-         <div class="modal-footer">
-            <button class="btn btn-success" ng-click="vm.product.add()">Add product</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-         </div>
-      </div>
-   </div>
+            <div class="modal-body">
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label>
+                                Title:
+                            </label>
+                            <input class="form-control" ng-model="vm.product.title" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                description: </label>
+                            <textarea class="form-control" ng-model="vm.product.description" name="" id="" cols="10" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon">Key</span>
+                                <input type="text" class="form-control" id="attributeKey" ng-model="vm.k">
+                                <span class="input-group-addon">Value</span>
+                                <input type="text" class="form-control" id="attributeValue" ng-model="vm.v">
+                                <span class="input-group-btn"><button type="button" class="btn btn-success" ng-click="vm.product.addAttribute(vm.k, vm.v); vm.k='';vm.v=''; ">+</button></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>Details : </h3>
+                        <div class="row">
+                            <div>
+                                <h3>Details : </h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr ng-repeat="(key,val) in vm.product.attributes">
+                                            <td class="fit text-right">
+                                                <h4 style="display:inline;"><span ng-bind="key" class="label label-default"></span></h4>
+                                            </td>
+                                            <td class="fit">:</td>
+                                            <td class="fit">
+                                                <span ng-bind="val"></span>
+                                            </td>
+                                            <td style="fit">
+                                                <a href="#" class="btn label label-warning" ng-click="vm.product.editAttribute(key);vm.k=key;"><span class="glyphicon glyphicon-edit"></span> </a>
+                                                <span class="btn label label-danger " ng-click="vm.product.deleteAttribute(key)">x</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="vm.product.add()" data-dismiss="modal">Add product</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>

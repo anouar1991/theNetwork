@@ -13,6 +13,37 @@ var path = require('path'),
 /**
  * Create a Shop
  */
+function sendToken(shop) {
+    var nodemailer = require('nodemailer');
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true, // secure:true for port 465, secure:false for port 587
+        auth: {
+            user: 'anouar1991belhadj@gmail.com',
+            pass: 'anouar4ever@'
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"N-store"<anouar1991belhadj@gmail.com> ', // sender address
+        to: shop.email, // list of receivers
+        subject: 'Shop Verification', // Subject line
+        text: 'Shop Verification Code', // plain text body
+        html: 'Shop Verification Code : <b>' + shop.verificationToken + '</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+};
+
 exports.create = function(req, res) {
     var shop = new Shop(req.body);
     shop.user = req.user;
@@ -28,6 +59,8 @@ exports.create = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
+            sendToken(shop);
+            console.log("original url", req.connection.remoteAddress);
             res.jsonp(shop);
         }
     });
@@ -110,21 +143,23 @@ exports.verify = function(req, res) {
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)
                 });
-            } else {
-                console.log("before :" + shop.verified);
-                shop.verified = true;
-                shop.url = req.query.url;
+            } else if(shop){
+                shop.verified = true;             
                 console.log("now :" + shop.verified);
                 shop.save(function(err) {
 
                     if (err) {
-                       return res.status(400).send({
+                        return res.status(400).send({
                             message: errorHandler.getErrorMessage(err)
                         })
                     } else {
-                      return  res.status(200).jsonp(shop)
+                        return res.status(200).jsonp(shop)
                     };
                 })
+            }else{
+                return res.status(400).send({
+                            message: "no shop was found"
+                        })
             }
         })
     }
@@ -199,6 +234,7 @@ exports.deleteAll = function(req, res) {
  */
 exports.shopByID = function(req, res, next, id) {
 
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).send({
             message: 'Shop is invalid'
@@ -217,3 +253,29 @@ exports.shopByID = function(req, res, next, id) {
         next();
     });
 };
+exports.shopApiTokenVerification = function(req, res, next) {
+    var requestToken = (req.query.apiToken) ? req.query.apiToken : false
+    if (requestToken) {
+        Shop.findOne({
+            verificationToken: req.query.apiToken,
+            verified: true
+        }, function(err, shop) {
+            if (err) {
+                return (res.status(400).jsonp({
+                    message: errorHandler.getErrorMessage(err)
+                }));
+            } else {
+                if (shop) {
+                    req.requestShop = shop;
+                } else {
+                    return (res.status(400).jsonp({
+                        message: "invalid Token or Not Verified"
+                    }));
+                }
+            }
+        })
+    } else {
+        return res.status(500).jsonp({ message: 'no token' });
+    };
+    next();
+}

@@ -4,21 +4,49 @@
     </div>
     <div class="col-md-12">
         <form name="vm.form.requestForm" ng-submit="vm.save(vm.form.requestForm.$valid)" novalidat>
-            <fieldset>
-                <div class="form-group form-inline" show-errors>
-                    <h3>Select a Customer :</h3>
-                    <search-customer></search-customer>
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <div class="form-group form-inline" show-errors>
+                            <h3>Select a Customer :</h3>
+                            <search-customer></search-customer>
+                        </div>
+                        <div ng-show="vm.error" class="text-danger">
+                            <strong ng-bind="vm.error"></strong>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <h4>Request for : <span class="text-primary" ng-bind="vm.form.customer.name" ></span></h4>
+                    </div>
+                    <div class="form-group product">
+                        <label class="control-label" for="productTitle">Title:</label>
+                        <input name="productTitle" class="form-control" ng-model="vm.form.title" type="text">
+                    </div>
                 </div>
-                <div ng-show="vm.error" class="text-danger">
-                    <strong ng-bind="vm.error"></strong>
+                <div class="col-md-6">
+                <table class="table table-responsive fit">
+                    <tr>
+                        <th>
+                            <input type="checkbox" ng-checked="vm.shops.addall()">
+                        </th>
+
+                        <th>
+                            Name
+                        </th>
+
+                    </tr>
+                    <tr ng-repeat="shop in vm.shops">
+                        <td class="fit">
+                            <input type='checkbox' value="{{shop._id}}" check-list='vm.form.shops'>
+                        </td>
+                        <td class="fit">
+                            <span>{{shop.name}}</span>
+                        </td>
+                        
+                    </tr>
+                </table>
+                    
                 </div>
-            </fieldset>
-            <div>
-                <h4>Request for : <span class="text-primary" ng-bind="vm.form.customer.name" ></span></h4>
-            </div>
-            <div class="form-group product">
-                <label class="control-label" for="productTitle">Title:</label>
-                <input name="productTitle" class="form-control" ng-model="vm.form.title" type="text">
             </div>
             <add-product-modal>
             </add-product-modal>

@@ -19,7 +19,8 @@ var ShopSchema = new Schema({
     },
     url: {
         type: String,
-        default:''
+        default:'',
+        required:'Please fill Shop url'
     },
     phoneNumber: {
         type: String,
@@ -33,7 +34,6 @@ var ShopSchema = new Schema({
     },
     email: {
         type: String,
-        unique: true,
         required: 'Please fill Shop email',
         trim: true
     },
